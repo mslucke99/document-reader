@@ -5,6 +5,8 @@
 import cv2 as cv
 import math
 
+
+# https://arxiv.org/abs/1704.03155v2
 net = cv.dnn.readNet("frozen_east_text_detection.pb")
 
 confThreshold = 0.5
