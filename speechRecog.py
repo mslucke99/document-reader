@@ -14,7 +14,7 @@ import pyttsx3
 language = "en"
 recog = sr.Recognizer()  #speech to text
 engine = pyttsx3.init()  # text to speech
-activate_word = "alexa"
+activate_word = "yo"
 
 
 # TEXT TO SPEECH
