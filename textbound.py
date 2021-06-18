@@ -1,6 +1,7 @@
 
-# This code is from https://github.com/spmallick/learnopencv/blob/master/TextDetectionEAST/textDetection.py
+# Much of this code is from https://github.com/spmallick/learnopencv/blob/master/TextDetectionEAST/textDetection.py
 # from https://learnopencv.com/deep-learning-based-text-detection-using-opencv-c-python/
+# I should probably ask for permission before we use this for anything too significant
 
 import cv2 as cv
 import math
