@@ -77,4 +77,32 @@ def decode(scores, geometry, scoreThresh):
     return [detections, confidences]
 
 def get_bounds(frame):
-    pass
+    height_ = frame.shape[0]
+    width_ = frame.shape[1]
+    rW = width_ / float(inpWidth)
+    rH = height_ / float(inpHeight)
+    blob = cv.dnn.blobFromImage(frame, 1.0, (inpWidth, inpHeight), (123.68, 116.78, 103.94), True, False)
+
+    net.setInput(blob)
+    output = net.forward(outputLayers)
+    t, _ = net.getPerfProfile()
+    label = 'Inference time: %.2f ms' % (t * 1000.0 / cv.getTickFrequency())
+
+    # Get scores and geometry
+    scores = output[0]
+    geometry = output[1]
+    [boxes, confidences] = decode(scores, geometry, confThreshold)
+
+    # Apply NMS
+    indices = cv.dnn.NMSBoxesRotated(boxes, confidences, confThreshold,nmsThreshold)
+    for i in indices:
+        # get 4 corners of the rotated rect
+        vertices = cv.boxPoints(boxes[i[0]])
+        # scale the bounding box coordinates based on the respective ratios
+        for j in range(4):
+            vertices[j][0] *= rW
+            vertices[j][1] *= rH
+        for j in range(4):
+            p1 = (int(vertices[j][0]), int(vertices[j][1]))
+            p2 = (int(vertices[(j + 1) % 4][0]), int(vertices[(j + 1) % 4][1]))
+            
