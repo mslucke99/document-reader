@@ -20,6 +20,8 @@ inpWidth = 320
 
 inpHeight = 320
 
+margin_size = 0.08
+
 ############ Utility functions ############
 def decode(scores, geometry, scoreThresh):
     detections = []
@@ -77,6 +79,11 @@ def decode(scores, geometry, scoreThresh):
     return [detections, confidences]
 
 def get_bounds(frame):
+    """
+    gets the bounds of text in an image
+    input: frame, an image
+    output: the vertices of the text in an image
+    """
     height_ = frame.shape[0]
     width_ = frame.shape[1]
     rW = width_ / float(inpWidth)
@@ -95,14 +102,37 @@ def get_bounds(frame):
 
     # Apply NMS
     indices = cv.dnn.NMSBoxesRotated(boxes, confidences, confThreshold,nmsThreshold)
+    bounds = []
     for i in indices:
         # get 4 corners of the rotated rect
         vertices = cv.boxPoints(boxes[i[0]])
         # scale the bounding box coordinates based on the respective ratios
         for j in range(4):
-            vertices[j][0] *= rW
-            vertices[j][1] *= rH
+            vertices[j][0] = int(vertices[j][0]*rW)
+            vertices[j][1] = int(vertices[j][1]*rH)
+        bounds.append(vertices)
+    return bounds
+        #for j in range(4):
+        #    p1 = (int(vertices[j][0]), int(vertices[j][1]))
+        #    p2 = (int(vertices[(j + 1) % 4][0]), int(vertices[(j + 1) % 4][1]))
+
+def checkmargins(frame, bounds=None):
+    if not bounds:
+        bounds = get_bounds(frame)
+
+    height = frame.shape[0]
+    width = frame.shape[1]
+    for vertices in bounds:
         for j in range(4):
-            p1 = (int(vertices[j][0]), int(vertices[j][1]))
-            p2 = (int(vertices[(j + 1) % 4][0]), int(vertices[(j + 1) % 4][1]))
-            
+            if vertex[j][0]/height < margin_size:
+                return 1
+            elif (height-vertex[j][0])/height < margin_size:
+                return 2
+            elif vertex[j][1]/width < margin_size:
+                return 3
+            elif (width-vertex[j][1])/width < margin_size:
+                return 4
+    return 0
+        #for j in range(4):
+        #    p1 = (int(vertices[j][0]), int(vertices[j][1]))
+        #    p2 = (int(vertices[(j + 1) % 4][0]), int(vertices[(j + 1) % 4][1]))
