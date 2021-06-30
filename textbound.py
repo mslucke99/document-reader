@@ -22,6 +22,10 @@ inpHeight = 320
 
 margin_size = 0.08
 
+outputLayers = []
+outputLayers.append("feature_fusion/Conv_7/Sigmoid")
+outputLayers.append("feature_fusion/concat_3")
+
 ############ Utility functions ############
 def decode(scores, geometry, scoreThresh):
     detections = []
@@ -122,7 +126,7 @@ def checkmargins(frame, bounds=None):
 
     height = frame.shape[0]
     width = frame.shape[1]
-    for vertices in bounds:
+    for vertex in bounds:
         for j in range(4):
             if vertex[j][0]/height < margin_size:
                 return 1
