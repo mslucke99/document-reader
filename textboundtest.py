@@ -1,5 +1,5 @@
 
-# This code is from https://github.com/spmallick/learnopencv/blob/master/TextDetectionEAST/textDetection.py
+# This code is adapted from https://github.com/spmallick/learnopencv/blob/master/TextDetectionEAST/textDetection.py
 # from https://learnopencv.com/deep-learning-based-text-detection-using-opencv-c-python/
 
 import cv2 as cv

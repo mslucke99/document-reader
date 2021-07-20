@@ -1,5 +1,4 @@
-# pytesseract==0.3.8
-tesseract-ocr==0.3.8
+pytesseract==0.3.8
 gTTS==2.2.3
 opencv==4.5.1
 pyttsx3==2.90
