@@ -2,6 +2,8 @@
 
 This is a research project intended to help people who are blind. This project is a work in progress and we have much of the project described below. At it's core, it is a document reader. By document, we mean anything with text, and not just traditional documents.
 
+NOTE: This is currently far from working. The description includes some of our future plans as well.
+
 # Description
 
 This project is a prototype that attempts to improve on existing document readers for the blind. We have several goals for this including allowing it to automatically detect the alignment of a document and tell the user where it needs to be moved so the camera can see it, detecting sections of a document, summarizing a document and a full speech-based interface.
