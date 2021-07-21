@@ -14,7 +14,7 @@ pip install numpy
 pip install pyttsx3
 pip install PyAudio
 ```
-(Note that you may need to manually download executable as the command contains errors)
+(Note that you may need to manually download pyaudio executable since the pip command contains errors)
 
 #### Step 3: Speech to text Dependencies
 ```
