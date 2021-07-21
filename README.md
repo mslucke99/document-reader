@@ -1,6 +1,6 @@
 # document-scanner
 
-This is a reserach project intended to help people who are blind. This project is a work in progress and we have much of the project described below. At it's core, it is a document reader. By document, we mean anything with text, and not just traditional documents.
+This is a research project intended to help people who are blind. This project is a work in progress and we have much of the project described below. At it's core, it is a document reader. By document, we mean anything with text, and not just traditional documents.
 
 # Description
 
