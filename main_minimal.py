@@ -35,22 +35,22 @@ while cv.waitKey(1) < 0:
         speechRecog.speak("The text is too low, could you move it up or the camera down?")
         pt1 = ((frame_height*2)//3, (frame_length*1)//2)
         pt2 = ((frame_height*3)//4, (frame_length*1)//2)
-        cv.arrowedLine(frame, pt1, pt2, (255, 165, 0))
+        cv.arrowedLine(frame, pt1, pt2, (255, 165, 0), thickness=5)
     elif alignment == 1:
         speechRecog.speak("It is too high, could you lower it?")
         pt1 = ((frame_height*1)//3, (frame_length*1)//2)
         pt2 = ((frame_height*1)//4, (frame_length*1)//2)
-        cv.arrowedLine(frame, pt1, pt2, (255, 165, 0))
+        cv.arrowedLine(frame, pt1, pt2, (255, 165, 0), thickness=5)
     elif alignment == 3:
         speechRecog.speak("Could you move the object to the left?")
         pt1 = ((frame_height*1)//2, (frame_length*1)//3)
         pt2 = ((frame_height*1)//2, (frame_length*1)//4)
-        cv.arrowedLine(frame, pt1, pt2, (255, 165, 0))
+        cv.arrowedLine(frame, pt1, pt2, (255, 165, 0), thickness=5)
     elif alignment == 4:
         speechRecog.speak("It is too far to the left. Could you move your camera to the left?")
         pt1 = ((frame_height*1)//2, (frame_length*2)//3)
         pt2 = ((frame_height*1)//2, (frame_length*3)//4)
-        cv.arrowedLine(frame, pt1, pt2, (255, 165, 0))
+        cv.arrowedLine(frame, pt1, pt2, (255, 165, 0), thickness=5)
 
     # cv.putText(frame, label, (0, 15), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255))
     # Display the frame
