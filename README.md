@@ -14,6 +14,6 @@ As mentioned earlier, all of this will be done with a speech-based interface. We
 
 This project may also include a barcode scanner. This will allow the user to get information about a product if we hook this prototype up to some external database. This could work in situations where the product is round, but the barcode can be easily scanned by the device's camera. This may not work in situations where the barcode is partially hidden.
 
-This prototype may also include some mechanism to summarize documents so that the user. This will hopefully be of good use as an alternative to skimming through a document. The implementation of this is still tbd.
+This prototype may also include some mechanism to summarize documents so that the user. This will hopefully be of good use as an alternative to skimming through a document. The implementation of this is still to be decided.
 
 
