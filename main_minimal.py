@@ -23,12 +23,14 @@ while cv.waitKey(1) < 0:
     frame_height = frame.shape[0]
     frame_length = frame.shape[1]
     alignment = textbound.checkmargins(frame)
-    if alignment == 0:
-        imgtxt = pytesseract.image_to_string(frame)
-
+    if alignment == 0: # if the text is aligned
+        imgtxt = pytesseract.image_to_string(frame) # get the text from the image
+        # text appears as multiple lines. The following will parse all the lines and say each one of them
+        imgtxtlist = [line for line in imgtxt.split('\n') if line != "" and line[0].isalnum()]
         print(imgtxt)
-        if imgtxt != "" and imgtxt[0].isalnum():
-            speechRecog.speak(imgtxt)
+        # if imgtxt != "" and imgtxt[0].isalnum():
+        for line in imgtxtlist:
+            speechRecog.speak(line) # will not say anything if there is no text, but this will still run
     elif alignment == 2:
         speechRecog.speak("The text is too low, could you move it up or the camera down?")
         pt1 = ((frame_height*2)//3, (frame_length*1)//2)
