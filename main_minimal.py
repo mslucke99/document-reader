@@ -6,7 +6,9 @@ import pytesseract
 #import os
 import speechRecog
 import textbound
+import thread
 
+speaking = False
 
 cap = cv.VideoCapture(0)
 
@@ -29,25 +31,36 @@ while cv.waitKey(1) < 0:
         imgtxtlist = [line for line in imgtxt.split('\n') if line != "" and line[0].isalnum()]
         print(imgtxt)
         # if imgtxt != "" and imgtxt[0].isalnum():
-        for line in imgtxtlist:
-            speechRecog.speak(line) # will not say anything if there is no text, but this will still run
+        if not speaking:
+            speaking = True
+            thread.start_new_thread(say, imgtxtlist)
+        #for line in imgtxtlist:
+        #    speechRecog.speak(line) # will not say anything if there is no text, but this will still run
     elif alignment == 2:
-        speechRecog.speak("The text is too low, could you move it up or the camera down?")
+        if not speaking:
+            speaking = True
+            thread.start_new_thread(say, ["The text is too low, could you move it up or the camera down?"])
         pt1 = ((frame_height*2)//3, (frame_length*1)//2)
         pt2 = ((frame_height*3)//4, (frame_length*1)//2)
         cv.arrowedLine(frame, pt1, pt2, (255, 165, 0), thickness=5)
     elif alignment == 1:
-        speechRecog.speak("It is too high, could you lower it?")
+        if not speaking:
+            speaking = True
+            thread.start_new_thread(say, ["It is too high, could you lower it?"])
         pt1 = ((frame_height*1)//3, (frame_length*1)//2)
         pt2 = ((frame_height*1)//4, (frame_length*1)//2)
         cv.arrowedLine(frame, pt1, pt2, (255, 165, 0), thickness=5)
     elif alignment == 3:
-        speechRecog.speak("Could you move the object to the left?")
+        if not speaking:
+            speaking = True
+            thread.start_new_thread(say, ["Could you move the object to the left?"])
         pt1 = ((frame_height*1)//2, (frame_length*1)//3)
         pt2 = ((frame_height*1)//2, (frame_length*1)//4)
         cv.arrowedLine(frame, pt1, pt2, (255, 165, 0), thickness=5)
     elif alignment == 4:
-        speechRecog.speak("It is too far to the left. Could you move your camera to the left?")
+        if not speaking:
+            speaking = True
+            thread.start_new_thread(say, ["It is too far to the left. Could you move your camera to the left?"])
         pt1 = ((frame_height*1)//2, (frame_length*2)//3)
         pt2 = ((frame_height*1)//2, (frame_length*3)//4)
         cv.arrowedLine(frame, pt1, pt2, (255, 165, 0), thickness=5)
@@ -56,3 +69,10 @@ while cv.waitKey(1) < 0:
     # Display the frame
     cv.imshow(kWinName,frame)
     cv.imwrite("output.png",frame)
+
+
+def say(phrases):
+    
+    for phrase in phrases:
+        speechRecog.speak(phrase)
+    speaking = False
