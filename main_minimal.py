@@ -6,7 +6,7 @@ import pytesseract
 #import os
 import speechRecog
 import textbound
-import thread
+import _thread as thread
 
 speaking = False
 
