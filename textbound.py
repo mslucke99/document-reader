@@ -129,13 +129,13 @@ def checkmargins(frame, bounds=None):
     conditions = []
     for vertex in bounds:
         for j in range(4):
-            if vertex[j][0]/height < margin_size:
+            if 1 not in conditions and vertex[j][0]/height < margin_size:
                 conditions.append(1) # too high I think
-            elif (height-vertex[j][0])/height < margin_size:
+            if 2 not in conditions and (height-vertex[j][0])/height < margin_size:
                 conditions.append(2) # too low I think
-            elif vertex[j][1]/width < margin_size:
+            if 3 not in conditions and vertex[j][1]/width < margin_size:
                 conditions.append(3) # too far to the left?
-            elif (width-vertex[j][1])/width < margin_size:
+            if 4 not in conditions and (width-vertex[j][1])/width < margin_size:
                 conditions.append(4) # too far to the right?
     return conditions
         #for j in range(4):
