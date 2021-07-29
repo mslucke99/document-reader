@@ -20,7 +20,7 @@ inpWidth = 320
 
 inpHeight = 320
 
-margin_size = 0.08
+margin_size = 0.065
 
 outputLayers = []
 outputLayers.append("feature_fusion/Conv_7/Sigmoid")
@@ -126,17 +126,18 @@ def checkmargins(frame, bounds=None):
 
     height = frame.shape[0]
     width = frame.shape[1]
+    conditions = []
     for vertex in bounds:
         for j in range(4):
             if vertex[j][0]/height < margin_size:
-                return 1
+                conditions.append(1) # too high I think
             elif (height-vertex[j][0])/height < margin_size:
-                return 2
+                conditions.append(2) # too low I think
             elif vertex[j][1]/width < margin_size:
-                return 3
+                conditions.append(3) # too far to the left?
             elif (width-vertex[j][1])/width < margin_size:
-                return 4
-    return 0
+                conditions.append(4) # too far to the right?
+    return conditions
         #for j in range(4):
         #    p1 = (int(vertices[j][0]), int(vertices[j][1]))
         #    p2 = (int(vertices[(j + 1) % 4][0]), int(vertices[(j + 1) % 4][1]))
