@@ -1,0 +1,13 @@
+python -m pip install --upgrade pip setuptools virtualenv
+python -m virtualenv kivy_venv
+activate environment
+python -m pip install kivy[base] kivy_examples
+pip install kivymd
+
+
+EXAMPLE RUNNING
+python kivy_venv\share\kivy-examples\demo\showcase\main.py
+
+
+RUN MY APP
+python kivy_venv\app.py
