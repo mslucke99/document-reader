@@ -11,3 +11,7 @@ python kivy_venv\share\kivy-examples\demo\showcase\main.py
 
 RUN MY APP
 python kivy_venv\app.py
+
+
+
+pip install zbarcam
