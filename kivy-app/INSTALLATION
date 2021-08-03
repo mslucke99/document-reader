@@ -16,3 +16,10 @@ python kivy_venv\app.py
 
 pip install zbarcam
 pip install opencv-python
+
+pip install pyzbar
+
+
+pip install beautifulsoup4
+pip install lxml 
+pip install requests 
