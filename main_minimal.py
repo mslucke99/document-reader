@@ -6,7 +6,7 @@ import pytesseract
 #import os
 import speechRecog
 import textbound
-import _thread as thread
+# import _thread as thread
 import threading
 
 threadcount = 0
@@ -67,7 +67,8 @@ while cv.waitKey(1) < 0:
     elif alignment == 1:
         if not speaking:
             speaking = True
-            thread.start_new_thread(say, (["It is too high, could you lower it?"],))
+            # thread.start_new_thread(say, (["It is too high, could you lower it?"],))
+            newthread = SayThread(threadcount, ["It is too high, could you lower it?"])
         pt1 = ((frame_height*1)//3, (frame_length*1)//2)
         pt2 = ((frame_height*1)//4, (frame_length*1)//2)
         cv.arrowedLine(frame, pt1, pt2, (255, 165, 0), thickness=5)
@@ -75,7 +76,8 @@ while cv.waitKey(1) < 0:
         if not speaking:
             speaking = True
             try:
-                thread.start_new_thread(say, (["Could you move the object to the left?"],))
+                # thread.start_new_thread(say, (["Could you move the object to the left?"],))
+                newthread = SayThread(threadcount, ["Could you move the object to the left?"])
             except:
                 speaking = False
         pt1 = ((frame_height*1)//2, (frame_length*1)//3)
@@ -84,7 +86,8 @@ while cv.waitKey(1) < 0:
     elif alignment == 4:
         if not speaking:
             speaking = True
-            thread.start_new_thread(say, (["It is too far to the left. Could you move your camera to the left?"],))
+            # thread.start_new_thread(say, (["It is too far to the left. Could you move your camera to the left?"],))
+            newthread = SayThread(threadcount, ["It is too far to the left. Could you move your camera to the left?"])
         pt1 = ((frame_height*1)//2, (frame_length*2)//3)
         pt2 = ((frame_height*1)//2, (frame_length*3)//4)
         cv.arrowedLine(frame, pt1, pt2, (255, 165, 0), thickness=5)
