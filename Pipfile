@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+beautifulsoup4 = "*"
+gTTS = "==2.2.3"
+lxml = "*"
+opencv-python = "==4.5.1.48"
+playsound = "==1.2.2"
+pytesseract = "==0.3.7"
+pyttsx3 = "==2.90"
+pyzbar = "*"
+SpeechRecognition = "==3.8.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
