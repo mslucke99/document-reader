@@ -1,0 +1,4 @@
+*.pb
+*.tar
+*.gz
+__pycache__
