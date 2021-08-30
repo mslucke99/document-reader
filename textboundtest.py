@@ -123,6 +123,7 @@ if __name__ == "__main__":
         for i in indices:
             # get 4 corners of the rotated rect
             vertices = cv.boxPoints(boxes[i[0]])
+            
             # scale the bounding box coordinates based on the respective ratios
             for j in range(4):
                 vertices[j][0] *= rW
@@ -133,7 +134,8 @@ if __name__ == "__main__":
                 # print(p1)
                 cv.line(frame, p1, p2, (0, 255, 0), 2, cv.LINE_AA)
                 # cv.putText(frame, "{:.3f}".format(confidences[i[0]]), (vertices[0][0], vertices[0][1]), cv.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1, cv.LINE_AA)
-
+            print(vertices)
+            
         # Put efficiency information
         cv.putText(frame, label, (0, 15), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255))
 
