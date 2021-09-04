@@ -56,3 +56,13 @@ The goal of this page is to scan a document using an aligment algorithm to help 
 ## ChatScreen.kv
 It contains a Message class handling the styling of the messages.
 <TextField@MDCard> represent the input bar, in which either the user can type the command, or use the microphone icon to specify the command.
+  
+# 4 Github Repos that could be helpful
+1 - https://github.com/Sahil-pixel/Kivy-Android-Face-Detection/blob/main/main.py
+  
+2 - https://github.com/cutehaddy/WhatsApp-Redesign/tree/main/Whatsapp%20Clone/kvs/pages
+
+3 - https://github.com/kivy-garden/zbarcam
+  
+4 - https://github.com/tito/android-zbar-qrcode
+  
