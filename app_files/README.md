@@ -1,6 +1,6 @@
 ### 
 
-# Problems
+# 1 To be Solved
 1- If I go to scan barcode through text I cannot use after the navigation drawer
 
 2- The speech to text should be changed, as it has a bad performance when it comes to understand human voices
@@ -8,7 +8,7 @@
 3- The load_video function when it has found a barcode it stores it in self.food_item, but it
 has not yet been display to the chat screen.
 
-# Main App
+# 2 Main App
 The .kv files handle the styling and structure of each screen page, but the classes shown in main.py handle the backend of the application, such as listen to the user when the microphone is pressed. 
 
 Note that the messages the app displays are not safe messages, they have been stored in demo_users/users.py and loaded into the application at run time by load_past_msg(self)
@@ -36,7 +36,7 @@ class InstructionsScreen(Screen): Not yet implemented; It is a place holder for 
 ## Scan Document Classes
 class ScanDocumentScreen (Screen): Not yet implemented, it is a place holder for when ScanDocument.kv starts being implemented
 
-# Screens (.kv files)
+# 3 Screens (.kv files)
 
 ## main.kv
 Registers all the different screens that the application can switch between, as well as the main navigation bar
