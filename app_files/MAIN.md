@@ -46,5 +46,7 @@ python kivy_venv\app.py
 
 # Explore the app
 1- Type "scan barcode" and press the send icon
+
 2- Press the microphone icon and say "scan barcode"
+
 3- Use the navigation bar to switch between screens
