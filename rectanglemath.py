@@ -48,7 +48,7 @@ def checkLineIntersection(line1, line2):
         return True
 
 def getLineIntersection(line1, line2):
-    # gets the intersection of lines with
+    # gets the intersection of lines without regards to the points that represent them on the rectangle
     slope1 = lineSlope(line1[0], line1[1])
     slope2 = lineSlope(line2[0], line2[1])
     interx = (slope1*line1[0][0]-slope2*line2[0][0])/(slope1-slope2)
