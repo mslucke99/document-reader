@@ -19,6 +19,11 @@ curl https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-v4.1.0-e
 Start-Process -FilePath "./tesseract-ocr-w64-setup-v4.1.0-elag2019.exe" -Wait
 Remove-Item tesseract-ocr-w64-setup-v4.1.0-elag2019.exe
 
+Write-Output 'Adding Tesseract OCR to user PATH'
+$path = [System.Environment]::GetEnvironmentVariable('path', [System.EnvironmentVariableTarget]::User)
+$path = ((($path -split ';' | Where-Object {$_ -ne ''}) + "$env:LOCALAPPDATA\Tesseract-OCR") | Get-Unique | Sort-Object) -join ';'
+[System.Environment]::SetEnvironmentVariable('path', $path, [System.EnvironmentVariableTarget]::User)
+
 Write-Output 'Installing PyAudio'
 curl https://download.lfd.uci.edu/pythonlibs/y2rycu7g/PyAudio-0.2.11-cp38-cp38-win_amd64.whl --output PyAudio-0.2.11-cp38-cp38-win_amd64.whl
 python -m pip install .\PyAudio-0.2.11-cp38-cp38-win_amd64.whl
