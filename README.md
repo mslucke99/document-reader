@@ -20,6 +20,24 @@ This prototype may also include some mechanism to summarize documents so that th
 
 ## Installation
 
+### Debian Systems (Ubuntu)
+
 ```bash
-bash setup.sh
+bash ./setup.sh
+```
+
+### Windows
+
+```powershell
+./setup.ps1
+```
+
+**Note:** Because Windows doesn't have a designated `bin` directory, the `PATH` variable has to be updated manually for each desired program to be accessible in the shell.
+This script should handle that for you, but it's worth opening a new shell or closing and re-opening your IDE before attempting to run the program.
+
+## Running
+
+```bash
+pipenv shell
+python ./main_minimal.py
 ```
