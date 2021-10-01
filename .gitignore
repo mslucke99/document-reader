@@ -1,0 +1,7 @@
+*.exe
+*.mp3
+*.pb
+*.png
+*.tar
+*.gz
+__pycache__
