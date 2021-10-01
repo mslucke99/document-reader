@@ -28,9 +28,7 @@ bash ./setup.sh
 
 ### Windows
 
-You'll need to run the following script through **PowerShell version 7 or higher**.
-PowerShell 7 allows for a mixture of cmdlet functions and bash commands to be used together and this script uses both.
-
+You'll need to run the following script through PowerShell.
 Windows also likes to protect users against malicious scripts of unknown origin so running scripts may not be enabled by default on your system.
 Unfortunately, since this script is not signed, you may have to change the [execution policy](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.1) temporarily to allow the script to run.
 
