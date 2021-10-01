@@ -28,8 +28,33 @@ bash ./setup.sh
 
 ### Windows
 
+You'll need to run the following script through PowerShell.
+Windows likes to protect users against malicious scripts of unknown origin so running scripts may not be enabled by default on your system.
+Unfortunately, since this script is not signed, you may have to change the [execution policy](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.1) temporarily to allow the script to run.
+
+Use the following command to determine what your current policy is:
+
+```powershell
+Get-ExecutionPolicy
+```
+
+You'll want to reset to this policy after the installation.
+Then run the following to enable execution.
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
+```
+
+You should then be able to run the script.
+
 ```powershell
 ./setup.ps1
+```
+
+_Don't forget to disable execution again_ by running the following with either `Undefined`, `Restricted`, or whatever the `Get-ExecutionPolicy` command returned from above.
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy <policy> -Scope CurrentUser
 ```
 
 **Note:** Because Windows doesn't have a designated `bin` directory, the `PATH` variable has to be updated manually for each desired program to be accessible in the shell.
