@@ -1,0 +1,1 @@
+Code adapted from https://towardsdatascience.com/image-panorama-stitching-with-opencv-2402bde6b46c
