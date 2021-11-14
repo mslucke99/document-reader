@@ -4,8 +4,8 @@ import difflib
 
 
 def main():
-    img1 = cv2.imread('label1.jpg')
-    img2 = cv2.imread('label2.jpg')
+    img1 = cv2.imread('image1.jpg')
+    img2 = cv2.imread('image2.jpg')
 
     # Adding custom options
     custom_config = r'--oem 3 --psm 6'
