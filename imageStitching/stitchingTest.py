@@ -1,8 +1,8 @@
 import numpy as np
 import cv2
 
-path1 = 'clorox{}.jpg' # GENERAL IMAGE PATH STRING FORMAT
-images = [cv2.imread(path1.format(i)) for i in range(1,10)]
+path1 = 'test/IMG_48{}.JPG' # GENERAL IMAGE PATH STRING FORMAT
+images = [cv2.imread(path1.format(i)) for i in range(57,83,2)]
 stitcher = cv2.Stitcher_create()
 (status, stitched) = stitcher.stitch(images)
 
