@@ -7,10 +7,13 @@ from numpy.polynomial.polynomial import Polynomial
 # Finds largest (most relevant) contour after preprocessing
 def find_contours(img):
     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    th, thresh_img = cv2.threshold(gray_img, 150, 255, cv2.THRESH_BINARY)
-    contours, hierarchy = cv2.findContours(thresh_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    th, thresh_img = cv2.threshold(gray_img, 80, 255, cv2.THRESH_BINARY)
+    # Kernel shape is a cross due to rigid horizontal/vertical nature of borders
+    kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (4, 4))
+    removed = cv2.morphologyEx(thresh_img, cv2.MORPH_CLOSE, kernel)
+    contours, hierarchy = cv2.findContours(removed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     c = max(contours, key=cv2.contourArea)
-    # cv2.drawContours(image=img, contours=c, contourIdx=-1, color=(0, 100, 0), thickness=3)
+    cv2.drawContours(image=img, contours=c, contourIdx=-1, color=(0, 100, 0), thickness=3)
     return c
 
 
@@ -65,13 +68,13 @@ def draw_neighborhoods(img, neighborhood_length):
 
 # Assumes that left/right sides of contour coincide with edges of image
 # Locates contour points that correspond with "top" and "bottom" sides of contour
-def find_top_bottom_sides(img, contour, neighborhood_length=100, tolerance=15):
+def find_top_bottom_sides(img, contour, neighborhood_length=150, tolerance=10):
     # draw_neighborhoods(img, neighborhood_length)  # Visualizes neighborhoods, for debugging purposes
     # Find corners of bounding rectangle
     rect = cv2.minAreaRect(contour)
     box = cv2.boxPoints(rect)
     box = np.int0(box)
-    lower_1, upper_left, upper_right, lower_2 = box[0], box[1], box[2], box[3]
+    lower_1, upper_left, upper_right, lower_2 = box[3], box[0], box[1], box[0]
 
     # Find line connecting upper two corners
     rect_line = [upper_right[0] - upper_left[0], upper_right[1] - upper_left[1]]  # Encodes slope of line
@@ -111,12 +114,6 @@ def find_top_bottom_sides(img, contour, neighborhood_length=100, tolerance=15):
                     bottom_side_contours.append(point)
 
     return top_side_contours, bottom_side_contours
-
-
-def plot_parabola(img, polynomial):
-    for x in range(len(img[1])):
-        y = polynomial[0] + (polynomial[1] * x) + (polynomial[2] * (x ** 2))
-        plot_point(img, int(x), int(y), True)
 
 
 # List returned is ordered from lowest to highest degree: [0, 1, 2]

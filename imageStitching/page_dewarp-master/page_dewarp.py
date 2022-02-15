@@ -9,6 +9,9 @@
 # License: MIT License (see LICENSE.txt)
 ######################################################################
 
+# Edited by: Ryan Diaz
+# Date: February 2022
+
 import os
 import sys
 import datetime
@@ -16,6 +19,7 @@ import cv2
 from PIL import Image
 import numpy as np
 import scipy.optimize
+import crop  # Local file
 
 # for some reason pylint complains about cv2 members being undefined :(
 # pylint: disable=E1101
@@ -92,7 +96,7 @@ def debug_show(name, step, text, display):
     if DEBUG_OUTPUT != 'screen':
         filetext = text.replace(' ', '_')
         outfile = name + '_debug_' + str(step) + '_' + filetext + '.png'
-        cv2.imwrite("page_dewarp_fda5_output.png", display)
+        cv2.imwrite("debuggeed_output.png", display)
 
     if DEBUG_OUTPUT != 'file':
 
@@ -848,14 +852,13 @@ def main():
     outfiles = []
 
     for imgfile in sys.argv[1:]:
-
         img = cv2.imread(imgfile)
-        i = 2
-        img = img[1500 + (90 * (i - 1)):2000 + (90 * (i - 1)), 600:1500]
-        img = cv2.cvtColor(cv2.threshold(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY), 150, 255, cv2.THRESH_BINARY)[1],
-                           cv2.COLOR_GRAY2BGR)
-        cv2.imwrite("page_dewarp_fda2_input.png", img)
+        imgfile = imgfile.split('.jpg')[0]
+        img = crop.crop(img)
+        # cv2.imwrite(f"page_dewarp_{imgfile}_input.png", img)
         small = resize_to_screen(img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         basename = os.path.basename(imgfile)
         name, _ = os.path.splitext(basename)
 
@@ -909,9 +912,16 @@ def main():
 
         print( '  wrote', outfile)
 
-    print('to convert to PDF (requires ImageMagick):')
-    print('  convert -compress Group4 ' + ' '.join(outfiles) + ' output.pdf')
+        print('to convert to PDF (requires ImageMagick):')
+        print('  convert -compress Group4 ' + ' '.join(outfiles) + ' output.pdf')
 
 
 if __name__ == '__main__':
-    main()
+    while(True):
+        try:
+            main()
+            break
+        except ZeroDivisionError:
+            print('This cropping is not suitable for dewarping. Please try again.')
+            continue
+
