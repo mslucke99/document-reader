@@ -20,6 +20,7 @@ from PIL import Image
 import numpy as np
 import scipy.optimize
 import crop  # Local file
+import detect_label # Local file
 
 # for some reason pylint complains about cv2 members being undefined :(
 # pylint: disable=E1101
@@ -854,11 +855,13 @@ def main():
     for imgfile in sys.argv[1:]:
         img = cv2.imread(imgfile)
         imgfile = imgfile.split('.jpg')[0]
-        img = crop.crop(img)
+        # img = crop.crop(img)
+        crops = detect_label.auto_crop(img)
         # cv2.imwrite(f"page_dewarp_{imgfile}_input.png", img)
+
+        img = crops[0]
         small = resize_to_screen(img)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+
         basename = os.path.basename(imgfile)
         name, _ = os.path.splitext(basename)
 
