@@ -1,0 +1,6 @@
+numpy
+matplotlib
+scipy
+sympy
+opencv-python
+tomlkit
