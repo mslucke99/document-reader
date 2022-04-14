@@ -1,0 +1,22 @@
+# Read command-line arguments
+# Incremental stitching, catch failure cases
+
+import cv2
+import sys
+
+if len(sys.argv) < 2:
+    print("No images input!")
+
+images = [cv2.imread(filename) for filename in sys.argv[1:]]
+stitcher = cv2.Stitcher_create()
+
+# likely to crash when nan or inf introduced
+(status, stitched) = stitcher.stitch(images)
+
+# if the status is '0', then OpenCV successfully performed image stitching
+if status == 0:
+    pass
+else:
+    print("[INFO] image stitching failed ({})".format(status))
+
+if __name__ == "__main__":

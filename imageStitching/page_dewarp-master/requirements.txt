@@ -1,5 +1,0 @@
-page_dewarp
-numpy
-scipy
-Image
-cv2>=3.0
