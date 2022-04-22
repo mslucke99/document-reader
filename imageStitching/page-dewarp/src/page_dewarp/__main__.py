@@ -8,6 +8,8 @@ from image import WarpedImage
 from options import cfg
 from pdf import save_pdf
 
+import detect_label
+
 # for some reason pylint complains about cv2 members being undefined :(
 # pylint: disable=E1101
 

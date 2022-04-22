@@ -5,6 +5,7 @@ from pathlib import Path
 import numpy as np
 from cv2 import INTER_AREA, imread, rectangle
 from cv2 import resize as cv2_resize
+from page_dewarp import debug_show
 from scipy.optimize import minimize
 
 # from debug_utils import debug_show
@@ -16,6 +17,7 @@ from projection import project_xy
 from solve import get_default_params
 from spans import assemble_spans, keypoints_from_samples, sample_spans
 
+from detect_label import auto_crop  # Local file
 
 def imgsize(img):
     height, width = img.shape[:2]
@@ -42,7 +44,16 @@ class WarpedImage:
     def __init__(self, imgfile: str | Path):
         if isinstance(imgfile, Path):
             imgfile = str(imgfile)
-        self.cv2_img = imread(imgfile)
+        pre_image = imread(imgfile)
+        cropped_image = auto_crop(pre_image)
+
+        # Modified to automatically crop image around detected label
+        if len(cropped_image) > 0:
+            self.cv2_img = cropped_image[0]
+        else:
+            print("A label in the image was not found")
+            self.cv2_img = pre_image
+
         self.file_path = Path(imgfile).resolve()
         self.small = self.resize_to_screen()
         size, resized = self.size, self.resized
